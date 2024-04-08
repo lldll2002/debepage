@@ -14,10 +14,69 @@
     <button type="button" id="submitForm">Submit</button>
     <button type="button" id="resetForm">Reset</button>
 
-    <scrip>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      let Form = document.getElementById("myForm");
+      myForm.addEventListener("change", function(event){
+        console.log("change : ",event.target);
+      })
+      myForm.addEventListener("input", function(event){
+        console.log("input : ", event.target);
+      })
+      myForm.addEventListener("cut", function(event){
+        console.log("cut : ", event.target);
+      })
+
+      // myform.addEventListener("submit", function(event) {
+      // event.preventDefault();
+      // console.log("Submitted!",  new FormData(myform));
+      // })
+
+      // let reset = document.getElementById("reset")
+      // reset.addEventListener("click", function(event) {
+      //   event.preventDefault();
+      //   myform.reset();
+      //   console.log("Reset!");
+      // })
+
+
+    
+      let submitForm = document.getElementById("submitForm");
+      submitForm.addEventListener("click", function(event) {
+        let formdata = new FormData(myForm);
+        let jsonObject = {};       
+        for (const [key, value] of formdata.entries()) {
+          jsonObject[key] = value;
+         // console.log(key, value);
+        }
+              fetch('https://jsonplaceholder.typicode.com/posts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(jsonObject)
+      })
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch((error) => console.error(error));
+      
+      // fetch('')
+        //   .then(response => response.json())
+        //   .then(data => console.log(data))
+        //   .catch(error => console.log(error));
+      });
+
 
       
-    </scrip>
+      
+      });
+    
+    document.getElementById('resetForm').addEventListener('click', function() {
+      form.reset();
+          });
+      
+    
+    </script>
   </form>
 </body>
 </html>

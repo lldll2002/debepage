@@ -1,7 +1,11 @@
 import fetch from 'node-fetch';
+import { isAsyncFunction } from 'util/types';
 
 fetch('https://api.thedogapi.com/v1/breeds')
-  .then(response => response.json())
+  .then(response =>{
+      response.json()
+      console.log(response)
+    })
   .then(async data => {
     // [1] 전체 데이터
     console.log(data);
@@ -17,8 +21,8 @@ fetch('https://api.thedogapi.com/v1/breeds')
     //   const result = {
     //     id: item.id,
     //     name: item.name,
-    //     image_url: await getImageFromImageId(item.reference_image_id)
-    //   }
+    //     image_url: await getImageFromImageId(item.reference_image_id) (키값)
+    //   } // await에서 받아올 때는 이름을 '완전히' 동일하게. function에 들어갈 때는 달라도 됨
     //   console.log(result);
     //   images.push(result);
     // }
@@ -44,17 +48,16 @@ fetch('https://api.thedogapi.com/v1/breeds')
   .catch(error => console.log(error))
 
 
-
-// async function getImageFromImageId(referenceImageId){
-//   try {
-//     const referenceImage = await fetch(`https://api.thedogapi.com/v1/images/${referenceImageId}`)
-//     const imageData = await referenceImage.json();
-//     console.log(imageData);  
-//     return imageData.url
   
-//   } catch (error) {
-//     console.error('오류 발생', error);
-//     return null;
-//   }
 
-}
+    async function getImageFromImageId(referenceImageId) {
+      try {
+    const referenceImage = await fetch(`https://api.thedogapi.com/v1/images/${referenceImageId}`)
+    const imageData = await referenceImage.json();
+    console.log(imageData);  
+    return imageData.url
+  }
+    catch (error) {
+    console.error('오류 발생', error);
+    return null;
+  }}
