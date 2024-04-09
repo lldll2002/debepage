@@ -5,6 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="../styles/responsive.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <style>
+    .swiper {
+      width: 100%;
+      height: 100%;
+    }
+
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    @media (max-width: 760px) {
+      .swiper-button-next {
+        right: 20px;
+        transform: rotate(90deg);
+      }
+
+      .swiper-button-prev {
+        left: 20px;
+        transform: rotate(90deg);
+      }
+    }
+
+  </style>
 </head>
 <body>
   <header>
@@ -21,7 +51,25 @@
 </ul>
 
   </header>
-
+  <!-- <div> -->
+  <div class="carousel">
+    <div class="swiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">Resize me!</div>
+      <div class="swiper-slide">Resize me!</div>
+      <div class="swiper-slide">Resize me!</div>
+      <div class="swiper-slide">Resize me!</div>
+      <div class="swiper-slide">Resize me!</div>
+      <div class="swiper-slide">Resize me!</div>
+      <div class="swiper-slide">Resize me!</div>
+      <div class="swiper-slide">Resize me!</div>
+      <div class="swiper-slide">Resize me!</div>
+      <div class="swiper-slide">Resize me!</div>
+    </div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+    </div>
+  </div><!-- </div> -->
     <main>
 <!-- 알트+시프트+방향표 하면 복사됨 -->
       <div>1</div>   
@@ -62,5 +110,28 @@
     //   }
     // })
   </script>
+  <script>
+    var swiper = new Swiper('.swiper', {
+      slidesPerView: 3,
+      direction: getDirection(),
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      on: {
+        resize: function () {
+          swiper.changeDirection(getDirection());
+        },
+      },
+    });
+
+    function getDirection() {
+      var windowWidth = window.innerWidth;
+      var direction = window.innerWidth <= 760 ? 'vertical' : 'horizontal';
+
+      return direction;
+    }
+  </script>
+ 
 </body>
 </html>
