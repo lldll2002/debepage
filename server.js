@@ -10,7 +10,7 @@ const fs = require('fs');
 
 // app.을 get으로 불러와서
 app.get('/', (req, res) =>{
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.join(__dirname, './index.html'));
 });
 
 app.use(express.static(__dirname));
